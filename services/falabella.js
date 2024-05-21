@@ -10,7 +10,10 @@ const falabella=async (product) => {
     await page.waitForSelector(".subTitle-rebrand");
 
     const productDetails = await page.evaluate(() => {
-        const items = Array.from(document.querySelectorAll('.search-results-4-grid')); // Selector que engloba cada producto
+        let items = Array.from(document.querySelectorAll('.search-results-4-grid')); // Selector que engloba cada producto
+        if(items.length==0){
+            items = Array.from(document.querySelectorAll('.search-results-list'));
+        }
         return items.slice(0, 5).map(item => {
             const name = item.querySelector('.subTitle-rebrand')?.innerText.trim(); // Obtiene el nombre del producto
             const price = item.querySelector('.copy10.medium')?.innerText.trim(); // Obtiene el precio

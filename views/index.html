@@ -39,21 +39,21 @@
             </div>
             <div class="search">
                 <input type="text" class="search__input" placeholder="Type your text">
-                <button class="search__button">
+                <button class="search__button" onclick="search()">
                     <img src="/icons/busqueda.svg" alt="Search icon" class="search__icon">
                 </button>
             </div>
             <div class="brands">
                 <h2>Visita Las Tiendas</h2>
-                <a class="button__brand" target="_blank" href="https://www.mercadolibre.com.co/"><img
+                <a class="button__brand button" target="_blank" href="https://www.mercadolibre.com.co/"><img
                         src="/img/logo-mercado.png" alt="mercado libre" class="img__brand">Mercado Libre</a>
-                <a class="button__brand" target="_blank" href="https://www.olimpica.com/"><img
+                <a class="button__brand button" target="_blank" href="https://www.olimpica.com/"><img
                         src="/img/logo-olimpica.png" alt="olimpica" class="img__brand">Olimpica</a>
-                <a class="button__brand" target="_blank" href="https://www.exito.com/"><img
+                <a class="button__brand button" target="_blank" href="https://www.exito.com/"><img
                         src="/img/logo-exito.png" alt="exito" class="img__brand">Exito</a>
-                <a class="button__brand" target="_blank" href="https://www.falabella.com.co/"><img
+                <a class="button__brand button" target="_blank" href="https://www.falabella.com.co/"><img
                         src="/img/logo-falabella.png" alt="falabella" class="img__brand">Falabella</a>
-                <a class="button__brand" target="_blank" href="https://www.alkosto.com/"><img
+                <a class="button__brand button" target="_blank" href="https://www.alkosto.com/"><img
                         src="/img/logo-alkosto.png" alt="alkoso" class="img__brand">Alkosto</a>
             </div>
         </aside>
@@ -62,82 +62,13 @@
                 <h1>Smart Priice</h1>
                 <hr>
             </header>
-            <main class="main-content">
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/img/icono.ico" alt="MacBook Air">
-                    </div>
-                    <div class="product-info">
-                        <div class="info">
-                            <h3>MacBook Air</h3>
-                            <p class="second">Mercado Libre</p>
-                            <p class="second">$999</p>
-                            <p class="second">5.0</p>
-                        </div>
-                        <a class="button" href="#">Ir</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/img/icono.ico" alt="MacBook Air">
-                    </div>
-                    <div class="product-info">
-                        <div class="info">
-                            <h3>MacBook Air</h3>
-                            <p class="second">Mercado Libre</p>
-                            <p class="second">$999</p>
-                            <p class="second">5.0</p>
-                        </div>
-                        <a class="button" href="#">Ir</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/img/icono.ico" alt="MacBook Air">
-                    </div>
-                    <div class="product-info">
-                        <div class="info">
-                            <h3>MacBook Air</h3>
-                            <p class="second">Mercado Libre</p>
-                            <p class="second">$999</p>
-                            <p class="second">5.0</p>
-                        </div>
-                        <a class="button" href="#">Ir</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/img/icono.ico" alt="MacBook Air">
-                    </div>
-                    <div class="product-info">
-                        <div class="info">
-                            <h3>MacBook Air</h3>
-                            <p class="second">Mercado Libre</p>
-                            <p class="second">$999</p>
-                            <p class="second">5.0</p>
-                        </div>
-                        <a class="button" href="#">Ir</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/img/icono.ico" alt="MacBook Air">
-                    </div>
-                    <div class="product-info">
-                        <div class="info">
-                            <h3>MacBook Air</h3>
-                            <p class="second">Mercado Libre</p>
-                            <p class="second">$999</p>
-                            <p class="second">5.0</p>
-                        </div>
-                        <a class="button" href="#">Ir</a>
-                    </div>
-                </div>
+            <main id="product-list" class="main-content">
             </main>
-            <footer>
+            <footer id="pagination">
             </footer>
         </div>
     </div>
+    <script src="js/page.js"></script>
 </body>
 
 </html>

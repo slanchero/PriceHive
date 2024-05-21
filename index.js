@@ -3,6 +3,7 @@ const {mercadoLibre} = require('./services/MercadoLibre');
 const { olimpica } = require('./services/olimpica');
 const {alkosto} = require('./services/alkosto');
 const { falabella } = require('./services/falabella');
+const { exito } = require('./services/exito');
 
 const app=express();
 
@@ -10,39 +11,45 @@ const app=express();
 app.use(express.static('public'));
 
 app.get('/',(req,res)=>{
-    // renderizar un archivo html
     res.sendFile(__dirname+'/views/index.html');
 });
 
-app.get('/mercadoLibre',async(req,res)=>{
-    const data=await mercadoLibre("Samsung S23");
+app.get("/products/:product",async(req,res)=>{
+    const product=req.params.product;
+    const [pExito,pAlkosto,pOlimpica,pMercado,pFalabella]=await Promise.all([[],alkosto(product),olimpica(product),mercadoLibre(product),falabella(product)]);
+    const products=[...pExito,...pAlkosto,...pOlimpica,...pMercado,...pFalabella];
+    res.json(products);
+});
+
+app.get('/mercadoLibre/:product',async(req,res)=>{
+    const data=await mercadoLibre(req.params.product);
 
     res.json(data);
 });
 
-app.get('/olimpica',async(req,res)=>{
-    const data=await olimpica("Samsung S23");
+app.get('/olimpica/:product',async(req,res)=>{
+    const data=await olimpica(req.params.product);
 
     res.json(data);
 });
 
-app.get('/alkosto',async(req,res)=>{
-    const data=await alkosto("Samsung S23");
+app.get('/exito/:product',async(req,res)=>{
+    const data=await exito(req.params.product);
 
     res.json(data);
 });
 
-app.get('/falabella',async(req,res)=>{
-    const data=await falabella("Samsung S23");
+app.get('/alkosto/:product',async(req,res)=>{
+    const data=await alkosto(req.params.product);
 
     res.json(data);
 });
 
-// app.get('/mercadoLibre',async(req,res)=>{
-//     const data=await mercadoLibre("Samsung S23");
+app.get('/falabella/:product',async(req,res)=>{
+    const data=await falabella(req.params.product);
 
-//     res.json(data);
-// });
+    res.json(data);
+});
 
 app.listen(3000,()=>{
     console.log('Server is running on port 3000');

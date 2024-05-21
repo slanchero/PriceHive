@@ -138,7 +138,8 @@ body {
     display:flex;
     flex-direction: column;
     width: 100%;
-    padding: 30px;
+    margin-top: 20px;
+    padding: 0px 30px;
 }
 
 .container .site .main-content .product-card{
@@ -161,7 +162,7 @@ body {
 }
 
 .container .site .main-content .product-card .product-info{
-    flex-grow: 3;
+    flex-grow: 2;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -170,7 +171,12 @@ body {
 .container .site .main-content .product-card .product-info .info{
     margin: 10px;
 } 
-.container .site .main-content .product-card .product-info .button{
+
+.container .site .main-content .product-card .product-info .info h3{
+    width: 90%;
+} 
+
+.container .site .main-content .product-card .button{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,6 +192,25 @@ body {
     font-weight: bold;
 }
 
+.button:hover{
+    box-shadow: #e4c6f3 0px 0px 10px;
+}
+
+.container .site footer{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.container .site footer .btn_page{
+    margin: 0 20px;
+    width: 35px;
+    height: 30px;
+    font-family: inherit;
+    background: #efe7f3;
+    border: #eedcf7 1px solid;
+    border-radius: 5px;
+}
 
 .second{
     color: #7f4e97;
