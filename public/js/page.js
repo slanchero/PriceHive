@@ -1,24 +1,81 @@
 const itemsPerPage = 5;
-let currentPage = 1;
-let products = []
+var currentPage = 1;
+var products = []
+var filteredProducts = products;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filterSelect = document.getElementById('filter');
+    const sortSelect = document.getElementById('sort-by');
+
+    filterSelect.addEventListener('change', function () {
+        const selectedFilter = this.value;
+        if (selectedFilter === '') {
+            filteredProducts = products;
+        } else {
+            filteredProducts = products.filter(product => product.page.toLowerCase() === selectedFilter.toLowerCase());
+        }
+
+        showCurrentPage(currentPage);
+        paginationControls();
+    });
+
+    sortSelect.addEventListener('change', function () {
+        const selectedSort = this.value;
+
+        if (selectedSort === 'price-asc') {
+            filteredProducts.sort((a, b) => a.price - b.price);   
+        } else if (selectedSort === 'price-desc') {
+            filteredProducts.sort((a, b) => b.price - a.price);
+        }else if (selectedSort === 'rating-asc') {
+            filteredProducts.sort((a, b) => a.rating - b.rating);
+        }else if (selectedSort === 'rating-desc') {
+            filteredProducts.sort((a, b) => b.rating - a.rating);
+        }else if (selectedSort === 'name-asc') {
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        }else if (selectedSort === 'name-desc') {
+            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+        }
+
+        showCurrentPage(currentPage);
+        paginationControls();
+    });
+
+});
 
 const search = async () => {
-    const response = await fetch('js/test.json');
+
+    const product = document.getElementById('search_input').value;
+
+    if (!product) {
+        alert('Please enter a product');
+        return;
+    }
+
+    const productList = document.getElementById('wait');
+
+    productList.innerHTML = `
+    <div class="loader">
+        <div class="eye"></div>
+    </div>
+    `;
+
+    const response = await fetch(`http://localhost:3000/products/${product}`);
     products = await response.json();
+
+    filteredProducts = products;
 
     showCurrentPage(currentPage)
     paginationControls()
-
 }
 
 const showCurrentPage = (page) => {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const itemsToDisplay = products.slice(startIndex, endIndex);
+    const itemsToDisplay = filteredProducts.slice(startIndex, endIndex);
 
 
     const productList = document.getElementById('product-list');
-    productList.innerHTML="";
+    productList.innerHTML = "";
 
     itemsToDisplay.forEach(product => {
 
@@ -34,7 +91,7 @@ const showCurrentPage = (page) => {
                 <h3>${product.name}</h3>
                 <p class="second">${product.page}</p>
                 <p class="second">$${product.price}</p>
-                ${product.rating?'<p class="second">'+product.rating+'</p>':""}
+                ${product.rating ? '<p class="second">' + product.rating + '</p>' : ""}
             </div>
         </div>
         <a class="button" target="_blank" href="${product.articleLink}">Ir</a>
@@ -48,11 +105,11 @@ const paginationControls = () => {
     const pagination = document.getElementById("pagination");
     pagination.innerHTML = '';
 
-    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement('button');
-        button.classList.add("btn_page","button");
+        button.classList.add("btn_page", "button");
         button.innerText = i;
         button.addEventListener('click', () => {
             currentPage = i;

@@ -1,4 +1,6 @@
 const express= require('express');
+const morgan = require('morgan');
+const cors= require('cors');
 const {mercadoLibre} = require('./services/MercadoLibre');
 const { olimpica } = require('./services/olimpica');
 const {alkosto} = require('./services/alkosto');
@@ -6,6 +8,9 @@ const { falabella } = require('./services/falabella');
 const { exito } = require('./services/exito');
 
 const app=express();
+
+app.use(cors());
+app.use(morgan('dev'));
 
 //Archivos publicos
 app.use(express.static('public'));
@@ -16,7 +21,7 @@ app.get('/',(req,res)=>{
 
 app.get("/products/:product",async(req,res)=>{
     const product=req.params.product;
-    const [pExito,pAlkosto,pOlimpica,pMercado,pFalabella]=await Promise.all([[],alkosto(product),olimpica(product),mercadoLibre(product),falabella(product)]);
+    const [pExito,pAlkosto,pOlimpica,pMercado,pFalabella]=await Promise.all([exito(product),alkosto(product),olimpica(product),mercadoLibre(product),falabella(product)]);
     const products=[...pExito,...pAlkosto,...pOlimpica,...pMercado,...pFalabella];
     res.json(products);
 });
