@@ -1,6 +1,6 @@
 ## Autores
-Santiago Llerena
-Eduardo Rey
+Santiago Llerena  
+Eduardo Rey  
 
 ## Requisitos
 - Node.js
