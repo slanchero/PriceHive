@@ -9,7 +9,7 @@ const mercadoLibre = async (product) => {
 
     await page.waitForSelector('.ui-search-layout__item');
 
-    const productDetails = await page.evaluate(() => {
+    var productDetails = await page.evaluate(() => {
         const items = Array.from(document.querySelectorAll('.ui-search-layout__item')); // Selector que engloba cada producto
         return items.slice(0, 5).map(item => {
             const name = item.querySelector('.ui-search-item__title')?.innerText.trim(); // Obtiene el nombre del producto
@@ -22,11 +22,14 @@ const mercadoLibre = async (product) => {
     });
     await browser.close();
 
+    productDetails=productDetails.filter(product=>!product.name.toLowerCase().includes('reacondicionado'));
+
+
     productDetails.map((product) => { product.rating = parseFloat(product.rating); });
 
     productDetails.sort((a, b) => a.price - b.price);
 
-    return productDetails;
+    return productDetails.slice(0, 3);
 };
 
 module.exports = { mercadoLibre };

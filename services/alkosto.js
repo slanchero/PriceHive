@@ -31,7 +31,7 @@ const alkosto = async (product) => {
 
     productDetails.sort((a, b) => a.price - b.price);
 
-    return productDetails;
+    return productDetails.slice(0, 3);
 }
 
 module.exports = { alkosto };

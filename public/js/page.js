@@ -4,6 +4,13 @@ var products = []
 var filteredProducts = products;
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementById('search_input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            search();
+        }
+    });
+
     const filterSelect = document.getElementById('filter');
     const sortSelect = document.getElementById('sort-by');
 
@@ -27,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (selectedSort === 'price-desc') {
             filteredProducts.sort((a, b) => b.price - a.price);
         }else if (selectedSort === 'rating-asc') {
-            filteredProducts.sort((a, b) => a.rating - b.rating);
+            filteredProducts.sort((a, b) => (a.rating ?? -Infinity) - (b.rating ?? -Infinity));
         }else if (selectedSort === 'rating-desc') {
-            filteredProducts.sort((a, b) => b.rating - a.rating);
+            filteredProducts.sort((a, b) => (b.rating ?? -Infinity) - (a.rating ?? -Infinity));
         }else if (selectedSort === 'name-asc') {
             filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
         }else if (selectedSort === 'name-desc') {
@@ -50,10 +57,18 @@ const search = async () => {
         alert('Please enter a product');
         return;
     }
-
-    const productList = document.getElementById('wait');
-
+    const productList = document.getElementById('product-list');
     productList.innerHTML = `
+    <div class="waiting-screen" id="wait">
+    </div>
+    `;
+
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = '';
+
+    const waitDiv = document.getElementById('wait');
+
+    waitDiv.innerHTML = `
     <div class="loader">
         <div class="eye"></div>
     </div>

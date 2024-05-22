@@ -167,10 +167,8 @@ body {
 }
 
 .container .site .main-content .product-card .product-info {
-    flex-grow: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-grow: 3;
+    height: auto;
 }
 
 .container .site .main-content .product-card .product-info .info {
