@@ -97,6 +97,17 @@ const showCurrentPage = (page) => {
         const productItem = document.createElement('div');
         productItem.className = 'product-card';
 
+        rating=`
+        <div class="star-group">
+            <input type="radio" class="star one" name="star_rating_${product.name}" disabled ${Math.round(product.rating)===1?"checked":""}>
+            <input type="radio" class="star two" name="star_rating_${product.name}" disabled ${Math.round(product.rating)===2?"checked":""}>
+            <input type="radio" class="star three" name="star_rating_${product.name}" disabled ${Math.round(product.rating)===3?"checked":""}>
+            <input type="radio" class="star four" name="star_rating_${product.name}" disabled ${Math.round(product.rating)===4?"checked":""}>
+            <input type="radio" class="star five" name="star_rating_${product.name}" disabled ${Math.round(product.rating)===5?"checked":""}>
+            ${product.rating ? '<p class="second">   (' + product.rating.toFixed(1) + ')</p>' : ""}
+        </div>
+        `;
+
         productItem.innerHTML = `
         <div class="product-img">
             <img src="${product.imageLink}" alt="MacBook Air">
@@ -106,7 +117,7 @@ const showCurrentPage = (page) => {
                 <h3>${product.name}</h3>
                 <p class="second">${product.page}</p>
                 <p class="second">$${product.price}</p>
-                ${product.rating ? '<p class="second">' + product.rating + '</p>' : ""}
+                ${product.rating ? rating : ''}           
             </div>
         </div>
         <a href="${product.articleLink}" target="_blank" class="cta">
