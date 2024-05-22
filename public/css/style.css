@@ -151,7 +151,7 @@ body {
     box-shadow: #e4c6f3 0px 0px 10px;
 }
 
-.container .site .main-content .product-card .product-img{
+.container .site .main-content .product-card .product-img {
     height: 120px;
     width: 120px;
     margin-left: 10px;
@@ -177,26 +177,6 @@ body {
 
 .container .site .main-content .product-card .product-info .info h3 {
     width: 90%;
-}
-
-.container .site .main-content .product-card .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 30px;
-    margin: 20px;
-    background: #efe7f3;
-    border: #eedcf7 1px solid;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-}
-
-.button:hover {
-    box-shadow: #e4c6f3 0px 0px 10px;
 }
 
 .container .site footer {
@@ -302,7 +282,7 @@ hr {
     width: 50%;
     border-radius: 50%;
     border: 1px solid black;
-    background-color: rgb(85, 0, 128);
+    background-color: #550080;
     position: absolute;
     left: 25%;
     top: 25%;
@@ -345,4 +325,56 @@ hr {
     100% {
         transform: scale(0.3);
     }
+}
+
+/* button */
+
+.cta {
+    margin: 20px;
+    text-decoration: none;
+}
+
+.cta span {
+    padding-bottom: 7px;
+    letter-spacing: 4px;
+    font-size: 14px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+.cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active svg {
+    transform: scale(0.9);
+}
+
+.hover-underline-animation {
+    position: relative;
+    color: black;
+    padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
